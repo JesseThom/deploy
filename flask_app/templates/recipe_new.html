@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>New recipe</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="w-50 d-flex justify-content-around mx-auto mb-3">
+            <h1 class="">Add a new Recipe!</h1>
+            <a href="/user/{{user.id}}"><button class="btn btn-success mt-2">Back to Recipes</button></a>
+            <a href="/user/logout"><button class="btn btn-primary mt-2">Log out</button></a>
+        </div>
+        <div class="row mt-5">
+            <div class="col-6">
+                <form action="/recipe/create" method="post">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input class="form-control my-3" type="text" name="name" id="name">
+                        {% for message in get_flashed_messages(category_filter=['err_recipes_name']) %}
+                        <p class="err-msg">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="description">Description:</label>
+                        <textarea class="form-control my-3" type="text" name="description" id="description" rows="3"></textarea>
+                        {% for message in get_flashed_messages(category_filter=['err_recipes_description']) %}
+                        <p class="err-msg">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <label for="instructions">Instructions:</label>
+                        <textarea class="form-control my-3" type="text" name="instructions" id="instructions" rows="3"></textarea>
+                        {% for message in get_flashed_messages(category_filter=['err_recipes_instructions']) %}
+                        <p class="err-msg">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <label for="date_made">Date Cooked Made:</label>
+                        <input class="form-control my-3" type="date" name="date_made" id="date_made">
+                    </div>
+                    <div>
+                        <label class="me-5" for="under_30">Under 30 Minutes:</label>
+                        <label for="under_30">Yes</label>
+                        <input class="me-5" type="radio" id="yes" name="under_30" value="1">
+                        <label for="under_30">No</label>
+                        <input type="radio" id="no" name="under_30" value="0">
+                    </div>
+                    <button class="btn btn-success d-block mx-auto mt-5">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
